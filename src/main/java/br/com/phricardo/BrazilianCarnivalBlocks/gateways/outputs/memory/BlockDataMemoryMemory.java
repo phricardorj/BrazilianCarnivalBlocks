@@ -1,6 +1,6 @@
 package br.com.phricardo.BrazilianCarnivalBlocks.gateways.outputs.memory;
 
-import br.com.phricardo.BrazilianCarnivalBlocks.domains.blocks.Block;
+import br.com.phricardo.BrazilianCarnivalBlocks.domains.block.Block;
 import br.com.phricardo.BrazilianCarnivalBlocks.gateways.outputs.BlockDataGateway;
 
 import java.util.ArrayList;
@@ -11,13 +11,16 @@ public class BlockDataMemoryMemory implements BlockDataGateway {
     private final List<Block> scheduled = new ArrayList<>();
 
     @Override
-    public void schedule(Block block) {
+    public Block schedule(Block block) {
         this.scheduled.add(block);
+        return block;
     }
 
     @Override
-    public Block searchBlockByName(Block block) {
-        return null;
+    public Block searchBlockByName(String name) {
+        return this.scheduled.stream()
+                .filter(b -> b.getName().equals(name))
+                .findFirst().orElseThrow();
     }
 
     @Override

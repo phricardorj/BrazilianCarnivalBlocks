@@ -2,19 +2,20 @@ package br.com.phricardo.BrazilianCarnivalBlocks.usecases;
 
 import br.com.phricardo.BrazilianCarnivalBlocks.domains.block.Block;
 import br.com.phricardo.BrazilianCarnivalBlocks.gateways.outputs.BlockDataGateway;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
+@Slf4j
 @Component
-@AllArgsConstructor
-public class FindAllBlocks {
+@RequiredArgsConstructor
+public class CreateOrUpdateBlock {
 
     private final BlockDataGateway blockDataGateway;
 
-    public List<Block> execute(){
-        return blockDataGateway.searchAllBlocks();
+    public Block execute(final Block block) {
+        final Block blockSaved = blockDataGateway.schedule(block);
+        log.info("Saved block: {}", blockSaved);
+        return blockSaved;
     }
-
 }

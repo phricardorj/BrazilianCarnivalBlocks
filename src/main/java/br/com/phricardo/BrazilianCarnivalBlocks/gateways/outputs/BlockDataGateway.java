@@ -1,14 +1,14 @@
 package br.com.phricardo.BrazilianCarnivalBlocks.gateways.outputs;
 
-import br.com.phricardo.BrazilianCarnivalBlocks.domains.blocks.Block;
+import br.com.phricardo.BrazilianCarnivalBlocks.domains.block.Block;
 
 import java.util.List;
 
 public interface BlockDataGateway {
 
-    void schedule(Block block);
+    Block schedule(Block block);
 
-    Block searchBlockByName(Block block);
+    Block searchBlockByName(String name);
 
     List<Block> searchAllBlocks();
 }
