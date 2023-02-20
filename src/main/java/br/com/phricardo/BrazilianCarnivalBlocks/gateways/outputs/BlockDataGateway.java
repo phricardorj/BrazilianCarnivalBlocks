@@ -8,7 +8,7 @@ public interface BlockDataGateway {
 
     Block schedule(Block block);
 
-    Block searchBlockByName(String name);
-
     List<Block> searchAllBlocks();
+
+    List<Block> searchBlockByName(String name);
 }

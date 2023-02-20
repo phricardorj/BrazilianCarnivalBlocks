@@ -5,6 +5,7 @@ import br.com.phricardo.BrazilianCarnivalBlocks.gateways.outputs.BlockDataGatewa
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlockDataMemoryMemory implements BlockDataGateway {
 
@@ -17,10 +18,10 @@ public class BlockDataMemoryMemory implements BlockDataGateway {
     }
 
     @Override
-    public Block searchBlockByName(String name) {
+    public List<Block> searchBlockByName(String name) {
         return this.scheduled.stream()
                 .filter(b -> b.getName().equals(name))
-                .findFirst().orElseThrow();
+                .collect(Collectors.toList());
     }
 
     @Override

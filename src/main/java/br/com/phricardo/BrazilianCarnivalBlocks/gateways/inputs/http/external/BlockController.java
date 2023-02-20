@@ -5,6 +5,7 @@ import br.com.phricardo.BrazilianCarnivalBlocks.gateways.inputs.http.resources.r
 import br.com.phricardo.BrazilianCarnivalBlocks.gateways.inputs.http.resources.requests.mappers.BlockRequestMapper;
 import br.com.phricardo.BrazilianCarnivalBlocks.usecases.CreateOrUpdateBlock;
 import br.com.phricardo.BrazilianCarnivalBlocks.usecases.FindAllBlocks;
+import br.com.phricardo.BrazilianCarnivalBlocks.usecases.FindBlocksByName;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,19 @@ public class BlockController {
 
     private final FindAllBlocks findAllBlocks;
     private final CreateOrUpdateBlock createOrUpdateBlock;
+    private final FindBlocksByName findBlocksByName;
     private final BlockRequestMapper blockRequestMapper;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Block> findAllBlocks() {
         return findAllBlocks.execute();
+    }
+
+    @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Block> searchBlockByName(@RequestParam String name) {
+        return findBlocksByName.execute(name);
     }
 
     @PostMapping
