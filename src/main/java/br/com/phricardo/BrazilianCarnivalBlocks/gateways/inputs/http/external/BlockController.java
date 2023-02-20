@@ -22,7 +22,7 @@ public class BlockController {
 
     private final FindAllBlocks findAllBlocks;
     private final CreateOrUpdateBlock createOrUpdateBlock;
-    private BlockRequestMapper blockRequestMapper;
+    private final BlockRequestMapper blockRequestMapper;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -32,7 +32,8 @@ public class BlockController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Block scheduleBlock(@RequestBody @Validated Block block) {
+    public Block scheduleBlock(@RequestBody @Validated BlockRequest blockRequest) {
+        Block block = blockRequestMapper.blockRequestToBlock(blockRequest);
         return createOrUpdateBlock.execute(block);
     }
 }
